@@ -268,7 +268,9 @@ const PRICING_DATA = {
       "id": "openai", "name": "OpenAI",
       "pricing_url": "https://openai.com/api/pricing/",
       "models": [
-        { "id": "gpt-5.6",      "name": "GPT-5.6 Sol",  "input_per_mtok": 5.0,  "output_per_mtok": 30.0, "context_window": 1050000, "notes": "Sol(最上位)。Terra $2.5/$15、Luna $1/$6。キャッシュ入力$0.5", "deprecated": false },
+        { "id": "gpt-5.6-sol",   "name": "GPT-5.6 Sol",   "input_per_mtok": 5.0,  "output_per_mtok": 30.0, "context_window": 1050000, "notes": "最上位ティア。キャッシュ入力$0.5", "deprecated": false },
+        { "id": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "input_per_mtok": 2.5,  "output_per_mtok": 15.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.25", "deprecated": false },
+        { "id": "gpt-5.6-luna",  "name": "GPT-5.6 Luna",  "input_per_mtok": 1.0,  "output_per_mtok": 6.0,  "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.1", "deprecated": false },
         { "id": "gpt-5.5",      "name": "GPT-5.5",      "input_per_mtok": 5.0,  "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": false },
         { "id": "gpt-5.4",      "name": "GPT-5.4",      "input_per_mtok": 2.5,  "output_per_mtok": 15.0, "context_window": 1000000, "notes": "長コンテキストは別レート", "deprecated": false },
         { "id": "gpt-5.4-nano", "name": "GPT-5.4 nano", "input_per_mtok": 0.20, "output_per_mtok": 1.25, "context_window": 1000000, "notes": "", "deprecated": false }
