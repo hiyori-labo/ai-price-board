@@ -209,7 +209,9 @@
   </div>
 
   <h2>コスト計算機</h2>
-  <div class="h2-sub">想定トークン数を入れると、全モデルの料金がレシートで出てきます。</div>
+  <div class="h2-sub">想定トークン数を入れると、選んだ会社のモデルの料金がレシートで出てきます。</div>
+
+  <div class="chips" id="calcChips" role="group" aria-label="レシートに含めるプロバイダで絞り込み"></div>
 
   <div class="calc">
     <div class="field">
@@ -300,7 +302,7 @@ const PRICING_DATA = {
 /* ===================================================== */
 
 const $ = (s) => document.querySelector(s);
-const state = { sortKey: "input_per_mtok", sortAsc: true, activeProviders: new Set() };
+const state = { sortKey: "input_per_mtok", sortAsc: true, activeProviders: new Set(), calcProviders: new Set() };
 
 const allModels = () => PRICING_DATA.providers.flatMap(p =>
   p.models.filter(m => !m.deprecated).map(m => ({ ...m, provider: p.id, providerName: p.name }))
@@ -315,23 +317,32 @@ function fmtCtx(n){
 }
 
 /* ---------- chips ---------- */
-function renderChips(){
-  const box = $("#chips");
+function renderProviderChips(sel, providerSet, onChange){
+  const box = $(sel);
   box.innerHTML = "";
   const all = document.createElement("button");
   all.className = "chip"; all.textContent = "すべて";
-  all.setAttribute("aria-pressed", state.activeProviders.size === 0);
-  all.onclick = () => { state.activeProviders.clear(); renderChips(); renderTable(); };
+  all.setAttribute("aria-pressed", providerSet.size === 0);
+  all.onclick = () => { providerSet.clear(); onChange(); };
   box.appendChild(all);
   PRICING_DATA.providers.forEach(p => {
     const b = document.createElement("button");
     b.className = "chip"; b.textContent = p.name;
-    b.setAttribute("aria-pressed", state.activeProviders.has(p.id));
+    b.setAttribute("aria-pressed", providerSet.has(p.id));
     b.onclick = () => {
-      state.activeProviders.has(p.id) ? state.activeProviders.delete(p.id) : state.activeProviders.add(p.id);
-      renderChips(); renderTable();
+      providerSet.has(p.id) ? providerSet.delete(p.id) : providerSet.add(p.id);
+      onChange();
     };
     box.appendChild(b);
+  });
+}
+function renderChips(){
+  renderProviderChips("#chips", state.activeProviders, () => { renderChips(); renderTable(); });
+}
+function renderCalcChips(){
+  renderProviderChips("#calcChips", state.calcProviders, () => {
+    renderCalcChips();
+    if ($("#receiptArea").firstElementChild) printReceipt();  // レシート表示中なら即再印字
   });
 }
 
@@ -384,7 +395,9 @@ function printReceipt(){
   const inTok = Math.max(0, parseFloat($("#inTok").value) || 0);
   const outTok = Math.max(0, parseFloat($("#outTok").value) || 0);
 
-  const items = allModels().map(m => ({
+  let models = allModels();
+  if (state.calcProviders.size > 0) models = models.filter(m => state.calcProviders.has(m.provider));
+  const items = models.map(m => ({
     name: m.name, providerName: m.providerName,
     usd: (inTok / 1e6) * m.input_per_mtok + (outTok / 1e6) * m.output_per_mtok
   })).sort((a, b) => a.usd - b.usd);
@@ -435,6 +448,7 @@ $("#officialLinks").innerHTML = PRICING_DATA.providers
   .map(p => `<a href="${p.pricing_url}" target="_blank" rel="noopener">${p.name} 公式料金 ↗</a>`).join("");
 
 renderChips();
+renderCalcChips();
 renderTable();
 </script>
 </body>
