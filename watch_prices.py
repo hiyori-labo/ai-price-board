@@ -17,7 +17,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-# 監視対象(index.html 内 PRICING_DATA の pricing_url と合わせておく)
+# 監視対象(data.js 内 PRICING_DATA の pricing_url と合わせておく)
 TARGETS = [
     {"name": "Anthropic", "url": "https://claude.com/pricing"},
     {"name": "OpenAI",    "url": "https://openai.com/api/pricing/"},
@@ -53,7 +53,7 @@ def notify_discord(changes: list[dict]) -> None:
     lines = ["**料金ページに変化を検知しました**"]
     for c in changes:
         lines.append(f"- {c['name']}: {c['url']}")
-    lines.append("data.json / index.html の料金を確認・更新してください。")
+    lines.append("data.js の料金を確認・更新してください。")
     resp = requests.post(webhook, json={"content": "\n".join(lines)}, timeout=15)
     resp.raise_for_status()
     print("Discord に通知しました")
