@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI API 料金ボード — ChatGPT / Gemini / Claude / Grok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mist:#EAEFED;
+    --ink:#16211F;
+    --ink-soft:#4A5A56;
+    --indigo:#3450C8;
+    --indigo-soft:#E4E9FB;
+    --paper:#FFFEF8;
+    --line:#C6D0CB;
+    --line-soft:#DDE4E1;
+    --cheap:#1D7A4F;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--mist);
+    color:var(--ink);
+    font-family:"IBM Plex Sans JP",sans-serif;
+    font-size:15px;
+    line-height:1.65;
+  }
+  .mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+
+  .wrap{max-width:960px;margin:0 auto;padding:28px 16px 80px}
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+    gap:16px;padding-bottom:18px;border-bottom:2px solid var(--ink);margin-bottom:22px;
+  }
+  .brand h1{font-size:22px;font-weight:700;letter-spacing:.02em}
+  .brand .sub{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+  .brand .sub .mono{font-size:12px}
+  .rate-box{
+    display:flex;align-items:center;gap:8px;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 12px;
+  }
+  .rate-box label{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+  .rate-box input{
+    width:80px;border:none;background:transparent;outline:none;
+    font-family:"IBM Plex Mono",monospace;font-size:16px;font-weight:600;color:var(--ink);
+    border-bottom:1.5px solid var(--indigo);text-align:right;padding:2px 2px;
+  }
+  .rate-box .unit{font-size:12px;color:var(--ink-soft)}
+
+  /* ---------- filter chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .chip{
+    border:1px solid var(--line);background:var(--paper);border-radius:999px;
+    padding:5px 14px;font-size:13px;cursor:pointer;color:var(--ink-soft);
+    font-family:inherit;transition:all .15s;
+  }
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .chip:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+
+  /* ---------- table ---------- */
+  .table-scroll{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:10px}
+  table{border-collapse:collapse;width:100%;min-width:640px}
+  thead th{
+    font-size:11.5px;font-weight:500;color:var(--ink-soft);text-align:right;
+    padding:10px 14px;border-bottom:1.5px solid var(--ink);white-space:nowrap;
+    cursor:pointer;user-select:none;background:var(--paper);
+  }
+  thead th:first-child{text-align:left;position:sticky;left:0;z-index:2}
+  thead th .arrow{color:var(--indigo);font-size:10px;margin-left:3px}
+  tbody td{
+    padding:11px 14px;border-bottom:1px solid var(--line-soft);
+    text-align:right;white-space:nowrap;font-size:14px;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  tbody td:first-child{text-align:left;position:sticky;left:0;background:var(--paper);z-index:1}
+  .model-name{font-weight:600;font-size:14px}
+  .provider-tag{
+    display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:4px;
+    margin-top:2px;letter-spacing:.03em;
+  }
+  .p-anthropic{background:#F3E8E2;color:#8A4B2F}
+  .p-openai{background:#E1F0EA;color:#1E6B52}
+  .p-google{background:#E4EBFA;color:#2B54A8}
+  .p-xai{background:#E8E8EC;color:#44444E}
+  .price-main{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14.5px}
+  .price-jpy{display:block;font-size:11px;color:var(--ink-soft);font-family:"IBM Plex Mono",monospace}
+  .ctx{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-soft)}
+  .note-mark{cursor:help;color:var(--indigo);font-size:12px;border-bottom:1px dotted var(--indigo)}
+
+  /* ---------- calculator ---------- */
+  h2{font-size:16px;font-weight:700;margin:36px 0 4px;letter-spacing:.02em}
+  .h2-sub{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px}
+  .calc{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+    background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px;
+  }
+  .field label{font-size:12px;color:var(--ink-soft);display:block;margin-bottom:5px}
+  .field input{
+    width:100%;font-family:"IBM Plex Mono",monospace;font-size:17px;font-weight:600;
+    border:none;border-bottom:1.5px solid var(--line);background:transparent;
+    padding:4px 2px;outline:none;color:var(--ink);
+  }
+  .field input:focus{border-bottom-color:var(--indigo)}
+  .presets{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .presets button{
+    font-size:11.5px;font-family:"IBM Plex Mono",monospace;border:1px solid var(--line);
+    background:transparent;border-radius:5px;padding:3px 9px;cursor:pointer;color:var(--ink-soft);
+  }
+  .presets button:hover{border-color:var(--indigo);color:var(--indigo)}
+  .calc-actions{grid-column:1/-1;display:flex;justify-content:flex-end}
+  .print-btn{
+    background:var(--indigo);color:#fff;border:none;border-radius:8px;
+    font-family:inherit;font-size:14px;font-weight:700;padding:10px 26px;cursor:pointer;
+    letter-spacing:.05em;
+  }
+  .print-btn:hover{background:#2A41A6}
+  .print-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* ---------- receipt (signature element) ---------- */
+  .receipt-area{display:flex;justify-content:center;margin-top:26px}
+  .receipt{
+    width:min(420px,100%);
+    background:var(--paper);
+    padding:26px 22px 18px;
+    box-shadow:0 6px 24px rgba(22,33,31,.14);
+    font-family:"IBM Plex Mono",monospace;
+    font-size:13px;
+    position:relative;
+    /* perforated top & bottom */
+    -webkit-mask:
+      radial-gradient(circle 7px at 10px 0, transparent 97%, #000) top left / 20px 51% repeat-x,
+      radial-gradient(circle 7px at 10px 100%, transparent 97%, #000) bottom left / 20px 51% repeat-x;
+    mask:
+      radial-gradient(circle 7px at 10px 0, transparent 97%, #000) top left / 20px 51% repeat-x,
+      radial-gradient(circle 7px at 10px 100%, transparent 97%, #000) bottom left / 20px 51% repeat-x;
+    animation:printIn .45s ease-out;
+    transform-origin:top center;
+  }
+  @keyframes printIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){
+    .receipt{animation:none}
+  }
+  .receipt h3{
+    text-align:center;font-size:13px;font-weight:600;letter-spacing:.18em;margin-bottom:2px;
+  }
+  .receipt .r-meta{text-align:center;font-size:10.5px;color:var(--ink-soft);margin-bottom:12px}
+  .receipt .r-divider{border:none;border-top:1.5px dashed var(--line);margin:10px 0}
+  .r-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:4.5px 0}
+  .r-row .r-model{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+  .r-row .r-cost{font-weight:600;white-space:nowrap}
+  .r-row .r-usd{display:block;text-align:right;font-size:10px;color:var(--ink-soft);font-weight:400}
+  .r-row.cheapest .r-model::after{
+    content:"最安";color:var(--cheap);font-size:10px;margin-left:6px;
+    border:1px solid var(--cheap);border-radius:3px;padding:0 4px;
+  }
+  .r-row.cheapest .r-cost{color:var(--cheap)}
+  .receipt .r-foot{text-align:center;font-size:10px;color:var(--ink-soft);margin-top:12px;letter-spacing:.08em}
+
+  /* ---------- footer ---------- */
+  .disclaimer{
+    margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--ink-soft);
+  }
+  .disclaimer a{color:var(--indigo)}
+  .official-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:8px;font-size:12px}
+
+  @media (max-width:560px){
+    .calc{grid-template-columns:1fr}
+    header{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <h1>AI API 料金ボード</h1>
+      <div class="sub">ChatGPT / Gemini / Claude / Grok の入出力単価を1画面で比較 ・ データ更新日 <span class="mono" id="lastUpdated"></span></div>
+    </div>
+    <div class="rate-box">
+      <label for="jpyRate">為替レート</label>
+      <input type="number" id="jpyRate" value="155" min="1" step="0.1" inputmode="decimal">
+      <span class="unit">円 / USD</span>
+    </div>
+  </header>
+
+  <div class="chips" id="chips" role="group" aria-label="プロバイダで絞り込み"></div>
+
+  <div class="table-scroll">
+    <table id="priceTable" aria-label="モデル別料金一覧">
+      <thead>
+        <tr>
+          <th data-key="name">モデル</th>
+          <th data-key="input_per_mtok">入力 <span class="mono">$/1M</span><span class="arrow" data-arrow="input_per_mtok"></span></th>
+          <th data-key="output_per_mtok">出力 <span class="mono">$/1M</span><span class="arrow" data-arrow="output_per_mtok"></span></th>
+          <th data-key="context_window">コンテキスト<span class="arrow" data-arrow="context_window"></span></th>
+          <th>備考</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <h2>コスト計算機</h2>
+  <div class="h2-sub">想定トークン数を入れると、全モデルの料金がレシートで出てきます。</div>
+
+  <div class="calc">
+    <div class="field">
+      <label for="inTok">入力トークン数</label>
+      <input type="number" id="inTok" value="1000000" min="0" inputmode="numeric">
+      <div class="presets">
+        <button type="button" data-target="inTok" data-val="100000">10万</button>
+        <button type="button" data-target="inTok" data-val="1000000">100万</button>
+        <button type="button" data-target="inTok" data-val="10000000">1000万</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="outTok">出力トークン数</label>
+      <input type="number" id="outTok" value="200000" min="0" inputmode="numeric">
+      <div class="presets">
+        <button type="button" data-target="outTok" data-val="50000">5万</button>
+        <button type="button" data-target="outTok" data-val="200000">20万</button>
+        <button type="button" data-target="outTok" data-val="2000000">200万</button>
+      </div>
+    </div>
+    <div class="calc-actions">
+      <button class="print-btn" id="printBtn" type="button">レシートを印字</button>
+    </div>
+  </div>
+
+  <div class="receipt-area" id="receiptArea" aria-live="polite"></div>
+
+  <div class="disclaimer">
+    <strong>ご注意:</strong> 本サイトの料金情報は手動更新のため、最新でない場合があります。契約・利用の前に必ず各社の公式料金ページをご確認ください。価格はすべて標準レート(USD / 100万トークン)で、バッチ割引・キャッシュ割引は含みません。
+    <div class="official-links" id="officialLinks"></div>
+  </div>
+
+</div>
+
+<script>
+/* =====================================================
+   料金データ(ここだけ編集すればOK / 将来 data.json に分離可)
+   単価は USD / 1,000,000 トークン(標準レート)
+   ===================================================== */
+const PRICING_DATA = {
+  "last_updated": "2026-07-10",
+  "providers": [
+    {
+      "id": "anthropic", "name": "Anthropic",
+      "pricing_url": "https://claude.com/pricing",
+      "models": [
+        { "id": "claude-fable-5",    "name": "Claude Fable 5",    "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "", "deprecated": false },
+        { "id": "claude-opus-4-8",   "name": "Claude Opus 4.8",   "input_per_mtok": 5.0,  "output_per_mtok": 25.0, "context_window": 1000000, "notes": "Fastモードは2倍料金", "deprecated": false },
+        { "id": "claude-sonnet-5",   "name": "Claude Sonnet 5",   "input_per_mtok": 2.0,  "output_per_mtok": 10.0, "context_window": 1000000, "notes": "2026/8/31まで導入価格。以降 $3/$15", "deprecated": false },
+        { "id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "input_per_mtok": 3.0,  "output_per_mtok": 15.0, "context_window": 1000000, "notes": "", "deprecated": false },
+        { "id": "claude-haiku-4-5",  "name": "Claude Haiku 4.5",  "input_per_mtok": 1.0,  "output_per_mtok": 5.0,  "context_window": 200000,  "notes": "", "deprecated": false }
+      ]
+    },
+    {
+      "id": "openai", "name": "OpenAI",
+      "pricing_url": "https://openai.com/api/pricing/",
+      "models": [
+        { "id": "gpt-5.5",      "name": "GPT-5.5",      "input_per_mtok": 5.0,  "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": false },
+        { "id": "gpt-5.4",      "name": "GPT-5.4",      "input_per_mtok": 2.5,  "output_per_mtok": 15.0, "context_window": 1000000, "notes": "長コンテキストは別レート", "deprecated": false },
+        { "id": "gpt-5.4-nano", "name": "GPT-5.4 nano", "input_per_mtok": 0.20, "output_per_mtok": 1.25, "context_window": 1000000, "notes": "", "deprecated": false }
+      ]
+    },
+    {
+      "id": "google", "name": "Google",
+      "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "models": [
+        { "id": "gemini-3.1-pro",   "name": "Gemini 3.1 Pro",   "input_per_mtok": 2.0,  "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
+        { "id": "gemini-3.5-flash", "name": "Gemini 3.5 Flash", "input_per_mtok": 1.5,  "output_per_mtok": 9.0,  "context_window": 1000000, "notes": "コンテキスト長は要公式確認", "deprecated": false },
+        { "id": "gemini-2.5-flash-lite", "name": "Gemini 2.5 Flash-Lite", "input_per_mtok": 0.10, "output_per_mtok": 0.40, "context_window": 1000000, "notes": "", "deprecated": false }
+      ]
+    },
+    {
+      "id": "xai", "name": "xAI",
+      "pricing_url": "https://x.ai/api",
+      "models": [
+        { "id": "grok-4.3",      "name": "Grok 4.3",      "input_per_mtok": 1.25, "output_per_mtok": 2.50, "context_window": null,    "notes": "コンテキスト長は要公式確認", "deprecated": false },
+        { "id": "grok-4.1-fast", "name": "Grok 4.1 Fast", "input_per_mtok": 0.20, "output_per_mtok": 0.50, "context_window": 2000000, "notes": "", "deprecated": false }
+      ]
+    }
+  ]
+};
+
+/* ===================================================== */
+
+const $ = (s) => document.querySelector(s);
+const state = { sortKey: "input_per_mtok", sortAsc: true, activeProviders: new Set() };
+
+const allModels = () => PRICING_DATA.providers.flatMap(p =>
+  p.models.filter(m => !m.deprecated).map(m => ({ ...m, provider: p.id, providerName: p.name }))
+);
+
+function jpyRate(){ const v = parseFloat($("#jpyRate").value); return (isFinite(v) && v > 0) ? v : 155; }
+function fmtUsd(n){ return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function fmtJpy(n){ return "¥" + Math.round(n).toLocaleString("ja-JP"); }
+function fmtCtx(n){
+  if (n == null) return "—";
+  return n >= 1000000 ? (n/1000000) + "M" : (n/1000) + "K";
+}
+
+/* ---------- chips ---------- */
+function renderChips(){
+  const box = $("#chips");
+  box.innerHTML = "";
+  const all = document.createElement("button");
+  all.className = "chip"; all.textContent = "すべて";
+  all.setAttribute("aria-pressed", state.activeProviders.size === 0);
+  all.onclick = () => { state.activeProviders.clear(); renderChips(); renderTable(); };
+  box.appendChild(all);
+  PRICING_DATA.providers.forEach(p => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = p.name;
+    b.setAttribute("aria-pressed", state.activeProviders.has(p.id));
+    b.onclick = () => {
+      state.activeProviders.has(p.id) ? state.activeProviders.delete(p.id) : state.activeProviders.add(p.id);
+      renderChips(); renderTable();
+    };
+    box.appendChild(b);
+  });
+}
+
+/* ---------- table ---------- */
+function renderTable(){
+  const rate = jpyRate();
+  let rows = allModels();
+  if (state.activeProviders.size > 0) rows = rows.filter(m => state.activeProviders.has(m.provider));
+  rows.sort((a, b) => {
+    const va = a[state.sortKey], vb = b[state.sortKey];
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (typeof va === "string") return state.sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    return state.sortAsc ? va - vb : vb - va;
+  });
+
+  document.querySelectorAll(".arrow").forEach(el => el.textContent = "");
+  const arrow = document.querySelector(`[data-arrow="${state.sortKey}"]`);
+  if (arrow) arrow.textContent = state.sortAsc ? "▲" : "▼";
+
+  $("#tableBody").innerHTML = rows.map(m => `
+    <tr>
+      <td>
+        <div class="model-name">${m.name}</div>
+        <span class="provider-tag p-${m.provider}">${m.providerName}</span>
+      </td>
+      <td><span class="price-main">${fmtUsd(m.input_per_mtok)}</span><span class="price-jpy">${fmtJpy(m.input_per_mtok * rate)}</span></td>
+      <td><span class="price-main">${fmtUsd(m.output_per_mtok)}</span><span class="price-jpy">${fmtJpy(m.output_per_mtok * rate)}</span></td>
+      <td><span class="ctx">${fmtCtx(m.context_window)}</span></td>
+      <td style="text-align:left">${m.notes ? `<span class="note-mark" title="${m.notes}">${m.notes}</span>` : ""}</td>
+    </tr>`).join("");
+}
+
+document.querySelectorAll("thead th[data-key]").forEach(th => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.key;
+    if (state.sortKey === key) state.sortAsc = !state.sortAsc;
+    else { state.sortKey = key; state.sortAsc = true; }
+    renderTable();
+  });
+});
+
+/* ---------- calculator / receipt ---------- */
+document.querySelectorAll(".presets button").forEach(b => {
+  b.addEventListener("click", () => { $("#" + b.dataset.target).value = b.dataset.val; });
+});
+
+function printReceipt(){
+  const rate = jpyRate();
+  const inTok = Math.max(0, parseFloat($("#inTok").value) || 0);
+  const outTok = Math.max(0, parseFloat($("#outTok").value) || 0);
+
+  const items = allModels().map(m => ({
+    name: m.name, providerName: m.providerName,
+    usd: (inTok / 1e6) * m.input_per_mtok + (outTok / 1e6) * m.output_per_mtok
+  })).sort((a, b) => a.usd - b.usd);
+
+  const now = new Date();
+  const stamp = now.toLocaleDateString("ja-JP") + " " + now.toLocaleTimeString("ja-JP", {hour:"2-digit",minute:"2-digit"});
+
+  $("#receiptArea").innerHTML = `
+    <div class="receipt" role="region" aria-label="コスト計算結果">
+      <h3>COST RECEIPT</h3>
+      <div class="r-meta">入力 ${inTok.toLocaleString("ja-JP")} tok ／ 出力 ${outTok.toLocaleString("ja-JP")} tok<br>${stamp} ・ レート ¥${rate}/USD</div>
+      <hr class="r-divider">
+      ${items.map((it, i) => `
+        <div class="r-row ${i === 0 ? "cheapest" : ""}">
+          <span class="r-model">${it.name}</span>
+          <span class="r-cost">${fmtJpy(it.usd * rate)}<span class="r-usd">${fmtUsd(it.usd)}</span></span>
+        </div>`).join("")}
+      <hr class="r-divider">
+      <div class="r-foot">STANDARD RATES ONLY ・ VERIFY OFFICIAL PRICING</div>
+    </div>`;
+}
+$("#printBtn").addEventListener("click", printReceipt);
+$("#jpyRate").addEventListener("input", () => { renderTable(); });
+
+/* ---------- footer links & init ---------- */
+$("#lastUpdated").textContent = PRICING_DATA.last_updated;
+$("#officialLinks").innerHTML = PRICING_DATA.providers
+  .map(p => `<a href="${p.pricing_url}" target="_blank" rel="noopener">${p.name} 公式料金 ↗</a>`).join("");
+
+renderChips();
+renderTable();
+</script>
+</body>
+</html>
