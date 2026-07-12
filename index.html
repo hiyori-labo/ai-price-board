@@ -10,6 +10,27 @@
 <meta property="og:image" content="https://ai-price.hiyori-labo.com/ogp.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI API 料金ボード">
+<meta name="twitter:description" content="ChatGPT・Gemini・Claude・Grok など主要AI APIの料金を1画面で比較。コスト計算機つき。">
+<meta name="description" content="ChatGPT・Gemini・Claude・Grok など主要AI APIの料金を1画面で比較。入出力トークン単価の一覧表とコスト計算機つき。">
+<link rel="canonical" href="https://ai-price.hiyori-labo.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "AI API 料金ボード",
+  "url": "https://ai-price.hiyori-labo.com/",
+  "description": "ChatGPT・Gemini・Claude・Grok など主要AI APIの料金を1画面で比較。コスト計算機つき。",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -182,7 +203,7 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<main class="wrap">
 
   <header>
     <div class="brand">
@@ -197,6 +218,8 @@
     </div>
   </header>
 
+  <section>
+  <h2 style="margin-top:0">モデル別料金一覧</h2>
   <div class="chips" id="chips" role="group" aria-label="プロバイダで絞り込み"></div>
 
   <div class="table-scroll">
@@ -213,7 +236,9 @@
       <tbody id="tableBody"></tbody>
     </table>
   </div>
+  </section>
 
+  <section>
   <h2>コスト計算機</h2>
   <div class="h2-sub">想定トークン数を入れると、選んだ会社のモデルの料金がレシートで出てきます。</div>
 
@@ -244,13 +269,17 @@
   </div>
 
   <div class="receipt-area" id="receiptArea" aria-live="polite"></div>
+  </section>
 
-  <div class="disclaimer">
+  <footer class="disclaimer">
     <strong>ご注意:</strong> 本サイトの料金情報は手動更新のため、最新でない場合があります。契約・利用の前に必ず各社の公式料金ページをご確認ください。価格はすべて標準レート(USD / 100万トークン)で、バッチ割引・キャッシュ割引は含みません。
     <div class="official-links" id="officialLinks"></div>
-  </div>
+  </footer>
 
-</div>
+</main>
+<noscript>
+  <p style="text-align:center;padding:40px 16px;font-size:15px;color:#4A5A56;">このサイトはJavaScriptが必要です。ブラウザの設定でJavaScriptを有効にしてください。</p>
+</noscript>
 
 <script src="data.js"></script>
 <script>
@@ -405,5 +434,7 @@ renderChips();
 renderCalcChips();
 renderTable();
 </script>
+<script data-goatcounter="https://hiyori-labo.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
