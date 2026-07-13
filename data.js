@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-07-12",
+  "last_updated": "2026-07-13",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -36,6 +36,7 @@ const PRICING_DATA = {
       "models": [
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
         { "id": "gemini-3.5-flash", "name": "Gemini 3.5 Flash", "input_per_mtok": 1.5, "output_per_mtok": 9.0, "context_window": 1000000, "notes": "コンテキスト長は要公式確認", "deprecated": false },
+        { "id": "gemini-3-flash", "name": "Gemini 3 Flash", "input_per_mtok": 0.50, "output_per_mtok": 3.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-3.1-flash-lite", "name": "Gemini 3.1 Flash-Lite", "input_per_mtok": 0.25, "output_per_mtok": 1.50, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "input_per_mtok": 1.25, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "200K超は $2.50/$15。2026/10/16 廃止予定", "deprecated": false },
         { "id": "gemini-2.5-flash-lite", "name": "Gemini 2.5 Flash-Lite", "input_per_mtok": 0.10, "output_per_mtok": 0.40, "context_window": 1000000, "notes": "2026/10/16 廃止予定", "deprecated": false }
