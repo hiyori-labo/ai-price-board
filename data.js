@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-07-13",
+  "last_updated": "2026-07-14",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -12,6 +12,7 @@ const PRICING_DATA = {
       "models": [
         { "id": "claude-fable-5", "name": "Claude Fable 5", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "claude-opus-4-8", "name": "Claude Opus 4.8", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "Fastモードは2倍料金", "deprecated": false },
+        { "id": "claude-opus-4-7", "name": "Claude Opus 4.7", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "旧世代Opus。新トークナイザーで実質コスト増（約30%）", "deprecated": false },
         { "id": "claude-opus-4-6", "name": "Claude Opus 4.6", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "旧世代Opus", "deprecated": false },
         { "id": "claude-sonnet-5", "name": "Claude Sonnet 5", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "2026/8/31まで導入価格。以降 $3/$15", "deprecated": false },
         { "id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "input_per_mtok": 3.0, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "", "deprecated": false },
