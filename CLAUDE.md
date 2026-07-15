@@ -38,6 +38,9 @@ GitHub Pagesで公開: https://ai-price.hiyori-labo.com/
 
 - Anthropic: 料金ページにプランFAQセクションが追加された(単価変更なし)
 - OpenAI: ページタイトルの「ChatGPT」→「Business」の1単語変更
+- xAI: 社名表記が「xAI Corp.」→「X.AI LLC」に変更(2026-07)
+- Anthropic: 教育メニューが「Education」→「Higher education / K-12 teachers」に分割、
+  K-12向けの規約リンク追加(2026-07)
 
 ## PRICING_DATA の編集ルール
 
