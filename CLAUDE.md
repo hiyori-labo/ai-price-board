@@ -41,6 +41,11 @@ GitHub Pagesで公開: https://ai-price.hiyori-labo.com/
 - xAI: 社名表記が「xAI Corp.」→「X.AI LLC」に変更(2026-07)
 - Anthropic: 教育メニューが「Education」→「Higher education / K-12 teachers」に分割、
   K-12向けの規約リンク追加(2026-07)
+- Anthropic: ナビのDepartmentsメニューで「Security」→「Cybersecurity」に改名、
+  Company sizeの項目順が入れ替わった(2026-07)
+- OpenAI: フッターの「More Stories」導線に「Supply Co.」リンクが追加(2026-07)
+- xAI: 「Latest news」フィードに新着記事(例: Grok Build is Now Open Source)が
+  追加され、古い記事が押し出される。ニュース見出しの更新は毎回起きる想定(2026-07)
 
 ## PRICING_DATA の編集ルール
 
