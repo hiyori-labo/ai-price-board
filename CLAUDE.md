@@ -48,6 +48,10 @@ GitHub Pagesで公開: https://ai-price.hiyori-labo.com/
 - OpenAI: フッターの「More Stories」導線に「Supply Co.」リンクが追加(2026-07)
 - xAI: 「Latest news」フィードに新着記事(例: Grok Build is Now Open Source)が
   追加され、古い記事が押し出される。ニュース見出しの更新は毎回起きる想定(2026-07)
+- Anthropic: 料金ページにサブスク(席課金)プランの機能比較表が追加された
+  (Free / Pro / Max 5x / Max 20x / Team / Enterprise の一覧)。「Context window 200k /
+  500k on default model」等が並ぶが、これはチャット版プランの機能でありAPIトークン単価
+  ではない。当ボードが管理するのはAPI単価なので対象外(2026-07)
 
 ## PRICING_DATA の編集ルール
 
