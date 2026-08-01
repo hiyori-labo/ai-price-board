@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 # 監視対象(data.js 内 PRICING_DATA の pricing_url と合わせておく)
 TARGETS = [
     {"name": "Anthropic", "url": "https://claude.com/pricing"},
-    {"name": "OpenAI",    "url": "https://openai.com/api/pricing/"},
+    {"name": "OpenAI",    "url": "https://developers.openai.com/api/docs/pricing"},
     {"name": "Google",    "url": "https://ai.google.dev/gemini-api/docs/pricing"},
     {"name": "xAI",       "url": "https://x.ai/api"},
 ]
