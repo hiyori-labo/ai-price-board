@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-08-01",
+  "last_updated": "2026-08-07",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
