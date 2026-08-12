@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-08-07",
+  "last_updated": "2026-08-12",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -27,9 +27,9 @@ const PRICING_DATA = {
         { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 5.0, "output_per_mtok": 30.0, "context_window": 1050000, "notes": "最上位ティア。キャッシュ入力$0.5。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.20。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-5.6-luna", "name": "GPT-5.6 Luna", "input_per_mtok": 0.20, "output_per_mtok": 1.20, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.02。Fast mode: 2倍", "deprecated": false },
-        { "id": "gpt-5.5", "name": "GPT-5.5", "input_per_mtok": 5.0, "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": false },
-        { "id": "gpt-5.4", "name": "GPT-5.4", "input_per_mtok": 2.5, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "長コンテキストは別レート", "deprecated": false },
-        { "id": "gpt-5.4-nano", "name": "GPT-5.4 nano", "input_per_mtok": 0.20, "output_per_mtok": 1.25, "context_window": 1000000, "notes": "", "deprecated": false }
+        { "id": "gpt-5.5", "name": "GPT-5.5", "input_per_mtok": 5.0, "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": true },
+        { "id": "gpt-5.4", "name": "GPT-5.4", "input_per_mtok": 2.5, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "長コンテキストは別レート", "deprecated": true },
+        { "id": "gpt-5.4-nano", "name": "GPT-5.4 nano", "input_per_mtok": 0.20, "output_per_mtok": 1.25, "context_window": 1000000, "notes": "", "deprecated": true }
       ]
     },
     {
