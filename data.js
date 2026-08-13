@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-08-12",
+  "last_updated": "2026-08-13",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -39,6 +39,7 @@ const PRICING_DATA = {
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
         { "id": "gemini-3.6-flash", "name": "Gemini 3.6 Flash", "input_per_mtok": 1.5, "output_per_mtok": 7.5, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-3.5-flash", "name": "Gemini 3.5 Flash", "input_per_mtok": 1.5, "output_per_mtok": 9.0, "context_window": 1000000, "notes": "コンテキスト長は要公式確認", "deprecated": false },
+        { "id": "gemini-3.5-flash-lite", "name": "Gemini 3.5 Flash-Lite", "input_per_mtok": 0.30, "output_per_mtok": 2.50, "context_window": 1000000, "notes": "キャッシュ入力$0.03", "deprecated": false },
         { "id": "gemini-3-flash", "name": "Gemini 3 Flash", "input_per_mtok": 0.50, "output_per_mtok": 3.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-3.1-flash-lite", "name": "Gemini 3.1 Flash-Lite", "input_per_mtok": 0.25, "output_per_mtok": 1.50, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-2.5-pro", "name": "Gemini 2.5 Pro", "input_per_mtok": 1.25, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "200K超は $2.50/$15。2026/10/16 廃止予定", "deprecated": false },
@@ -49,6 +50,7 @@ const PRICING_DATA = {
       "id": "xai", "name": "xAI",
       "pricing_url": "https://x.ai/api",
       "models": [
+        { "id": "grok-4.6", "name": "Grok 4.6", "input_per_mtok": 2.0, "output_per_mtok": 6.0, "context_window": 500000, "notes": "エージェント・インタラクティブ特化", "deprecated": false },
         { "id": "grok-4.5", "name": "Grok 4.5", "input_per_mtok": 2.0, "output_per_mtok": 6.0, "context_window": 500000, "notes": "キャッシュ入力$0.5/M。200K超は別レート(要確認)", "deprecated": false },
         { "id": "grok-4.3", "name": "Grok 4.3", "input_per_mtok": 1.25, "output_per_mtok": 2.50, "context_window": null, "notes": "コンテキスト長は要公式確認", "deprecated": false },
         { "id": "grok-4.1-fast", "name": "Grok 4.1 Fast", "input_per_mtok": 0.20, "output_per_mtok": 0.50, "context_window": 2000000, "notes": "", "deprecated": false }
