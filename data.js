@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-09-03",
+  "last_updated": "2026-09-04",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -25,7 +25,8 @@ const PRICING_DATA = {
       "id": "openai", "name": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing",
       "models": [
-        { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "最上位ティア。キャッシュ入力$0.40。Fast mode: 2倍。2026/11/21まで導入価格（通常 $5/$30）", "deprecated": false },
+        { "id": "gpt-6-astra", "name": "GPT-6 Astra", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1050000, "notes": "最上位モデル。キャッシュ入力$1.00。Fast mode: 2倍", "deprecated": false },
+        { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "キャッシュ入力$0.40。Fast mode: 2倍。2026/11/21まで導入価格（通常 $5/$30）", "deprecated": false },
         { "id": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.20。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-5.6-luna", "name": "GPT-5.6 Luna", "input_per_mtok": 0.20, "output_per_mtok": 1.20, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.02。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-5.5", "name": "GPT-5.5", "input_per_mtok": 5.0, "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": true },
