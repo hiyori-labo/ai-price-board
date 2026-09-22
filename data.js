@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-09-04",
+  "last_updated": "2026-09-23",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -12,6 +12,7 @@ const PRICING_DATA = {
       "models": [
         { "id": "claude-fable-5-1", "name": "Claude Fable 5.1", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "Fable 5後継。長時間エージェント向け", "deprecated": false },
         { "id": "claude-fable-5", "name": "Claude Fable 5", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "", "deprecated": false },
+        { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1000000, "notes": "Opus 5より効率化。標準ワークロードで約40%コスト削減", "deprecated": false },
         { "id": "claude-opus-5", "name": "Claude Opus 5", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "Fastモードは2倍料金($10/$50)。Effort制御に対応", "deprecated": false },
         { "id": "claude-opus-4-8", "name": "Claude Opus 4.8", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "Fastモードは2倍料金", "deprecated": false },
         { "id": "claude-opus-4-7", "name": "Claude Opus 4.7", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "旧世代Opus。新トークナイザーで実質コスト増（約30%）", "deprecated": false },
@@ -26,6 +27,8 @@ const PRICING_DATA = {
       "pricing_url": "https://developers.openai.com/api/docs/pricing",
       "models": [
         { "id": "gpt-6-astra", "name": "GPT-6 Astra", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1050000, "notes": "最上位モデル。キャッシュ入力$1.00。Fast mode: 2倍", "deprecated": false },
+        { "id": "gpt-6-sol", "name": "GPT-6 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.20。Fast mode: 2倍", "deprecated": false },
+        { "id": "gpt-6-luna", "name": "GPT-6 Luna", "input_per_mtok": 0.10, "output_per_mtok": 0.50, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.01", "deprecated": false },
         { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "キャッシュ入力$0.40。Fast mode: 2倍。2026/11/21まで導入価格（通常 $5/$30）", "deprecated": false },
         { "id": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.20。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-5.6-luna", "name": "GPT-5.6 Luna", "input_per_mtok": 0.20, "output_per_mtok": 1.20, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.02。Fast mode: 2倍", "deprecated": false },
@@ -54,6 +57,7 @@ const PRICING_DATA = {
       "id": "xai", "name": "xAI",
       "pricing_url": "https://x.ai/api",
       "models": [
+        { "id": "grok-4.7", "name": "Grok 4.7", "input_per_mtok": 2.0, "output_per_mtok": 6.0, "context_window": 500000, "notes": "コーディング・知識ワーク特化。200K超は別レート", "deprecated": false },
         { "id": "grok-4.6", "name": "Grok 4.6", "input_per_mtok": 2.0, "output_per_mtok": 6.0, "context_window": 500000, "notes": "エージェント・インタラクティブ特化", "deprecated": false },
         { "id": "grok-4.5", "name": "Grok 4.5", "input_per_mtok": 2.0, "output_per_mtok": 6.0, "context_window": 500000, "notes": "キャッシュ入力$0.5/M。200K超は別レート(要確認)", "deprecated": false },
         { "id": "grok-4.3", "name": "Grok 4.3", "input_per_mtok": 1.25, "output_per_mtok": 2.50, "context_window": null, "notes": "コンテキスト長は要公式確認", "deprecated": false },
