@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-09-23",
+  "last_updated": "2026-10-01",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -17,6 +17,7 @@ const PRICING_DATA = {
         { "id": "claude-opus-4-8", "name": "Claude Opus 4.8", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "Fastモードは2倍料金", "deprecated": false },
         { "id": "claude-opus-4-7", "name": "Claude Opus 4.7", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "旧世代Opus。新トークナイザーで実質コスト増（約30%）", "deprecated": false },
         { "id": "claude-opus-4-6", "name": "Claude Opus 4.6", "input_per_mtok": 5.0, "output_per_mtok": 25.0, "context_window": 1000000, "notes": "旧世代Opus", "deprecated": false },
+        { "id": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "Sonnet 5より30%高速。Adaptive thinking搭載", "deprecated": false },
         { "id": "claude-sonnet-5", "name": "Claude Sonnet 5", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "input_per_mtok": 3.0, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "input_per_mtok": 1.0, "output_per_mtok": 5.0, "context_window": 200000, "notes": "", "deprecated": false }
@@ -27,6 +28,7 @@ const PRICING_DATA = {
       "pricing_url": "https://developers.openai.com/api/docs/pricing",
       "models": [
         { "id": "gpt-6-astra", "name": "GPT-6 Astra", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1050000, "notes": "最上位モデル。キャッシュ入力$1.00。Fast mode: 2倍", "deprecated": false },
+        { "id": "gpt-6.1-sol", "name": "GPT-6.1 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.10。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6-sol", "name": "GPT-6 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.20。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6-luna", "name": "GPT-6 Luna", "input_per_mtok": 0.10, "output_per_mtok": 0.50, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.01", "deprecated": false },
         { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "キャッシュ入力$0.40。Fast mode: 2倍。2026/11/21まで導入価格（通常 $5/$30）", "deprecated": false },
