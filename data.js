@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-10-01",
+  "last_updated": "2026-10-11",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -20,6 +20,7 @@ const PRICING_DATA = {
         { "id": "claude-sonnet-5-5", "name": "Claude Sonnet 5.5", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "Sonnet 5より30%高速。Adaptive thinking搭載", "deprecated": false },
         { "id": "claude-sonnet-5", "name": "Claude Sonnet 5", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "input_per_mtok": 3.0, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "", "deprecated": false },
+        { "id": "claude-haiku-5-5", "name": "Claude Haiku 5.5", "input_per_mtok": 0.10, "output_per_mtok": 0.50, "context_window": 1000000, "notes": "100K超は $0.50/$2.50。Effort制御対応", "deprecated": false },
         { "id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "input_per_mtok": 1.0, "output_per_mtok": 5.0, "context_window": 200000, "notes": "", "deprecated": false }
       ]
     },
@@ -45,9 +46,9 @@ const PRICING_DATA = {
       "models": [
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
         { "id": "gemini-3.8-flash", "name": "Gemini 3.8 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50", "deprecated": false },
-        { "id": "gemini-3.7-flash", "name": "Gemini 3.7 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50", "deprecated": false },
-        { "id": "gemini-3.6-flash", "name": "Gemini 3.6 Flash", "input_per_mtok": 1.5, "output_per_mtok": 7.5, "context_window": 1000000, "notes": "", "deprecated": false },
-        { "id": "gemini-3.5-flash", "name": "Gemini 3.5 Flash", "input_per_mtok": 1.5, "output_per_mtok": 9.0, "context_window": 1000000, "notes": "コンテキスト長は要公式確認", "deprecated": false },
+        { "id": "gemini-3.7-flash", "name": "Gemini 3.7 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50。3.8 Flashへ自動ルーティング", "deprecated": true },
+        { "id": "gemini-3.6-flash", "name": "Gemini 3.6 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50", "deprecated": false },
+        { "id": "gemini-3.5-flash", "name": "Gemini 3.5 Flash", "input_per_mtok": 1.5, "output_per_mtok": 9.0, "context_window": 1000000, "notes": "公式料金ページから削除済み", "deprecated": true },
         { "id": "gemini-3.5-flash-lite", "name": "Gemini 3.5 Flash-Lite", "input_per_mtok": 0.30, "output_per_mtok": 2.50, "context_window": 1000000, "notes": "キャッシュ入力$0.03", "deprecated": false },
         { "id": "gemini-3-flash", "name": "Gemini 3 Flash", "input_per_mtok": 0.50, "output_per_mtok": 3.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "gemini-3.1-flash-lite", "name": "Gemini 3.1 Flash-Lite", "input_per_mtok": 0.25, "output_per_mtok": 1.50, "context_window": 1000000, "notes": "", "deprecated": false },
