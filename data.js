@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-10-11",
+  "last_updated": "2026-10-14",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -44,6 +44,7 @@ const PRICING_DATA = {
       "id": "google", "name": "Google",
       "pricing_url": "https://ai.google.dev/gemini-api/docs/pricing",
       "models": [
+        { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "2026/11/30まで導入価格。以降 $4/$20。無料枠なし", "deprecated": false },
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
         { "id": "gemini-3.8-flash", "name": "Gemini 3.8 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50", "deprecated": false },
         { "id": "gemini-3.7-flash", "name": "Gemini 3.7 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50。3.8 Flashへ自動ルーティング", "deprecated": true },
