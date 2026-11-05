@@ -21,7 +21,8 @@ from bs4 import BeautifulSoup
 TARGETS = [
     {"name": "Anthropic", "url": "https://claude.com/pricing"},
     {"name": "OpenAI",    "url": "https://developers.openai.com/api/docs/pricing"},
-    {"name": "Google",    "url": "https://ai.google.dev/gemini-api/docs/pricing"},
+    # 2026/11: ai.google.dev から aistudio.google.com へ移転。HTML版は本文がJS描画で取得できないため .md 版を監視
+    {"name": "Google",    "url": "https://aistudio.google.com/docs/pricing.md"},
     {"name": "xAI",       "url": "https://x.ai/api"},
 ]
 
