@@ -4,12 +4,13 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-11-05",
+  "last_updated": "2026-11-12",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
       "pricing_url": "https://claude.com/pricing",
       "models": [
+        { "id": "claude-fable-5-2", "name": "Claude Fable 5.2", "input_per_mtok": 8.0, "output_per_mtok": 40.0, "context_window": 1000000, "notes": "5.1から20%値下げ・最大30%高速。Fastモードは2倍料金", "deprecated": false },
         { "id": "claude-fable-5-1", "name": "Claude Fable 5.1", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "Fable 5後継。長時間エージェント向け", "deprecated": false },
         { "id": "claude-fable-5", "name": "Claude Fable 5", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1000000, "notes": "", "deprecated": false },
         { "id": "claude-opus-5-5", "name": "Claude Opus 5.5", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1000000, "notes": "Opus 5より効率化。標準ワークロードで約40%コスト削減", "deprecated": false },
@@ -33,7 +34,7 @@ const PRICING_DATA = {
         { "id": "gpt-6.1-terra", "name": "GPT-6.1 Terra", "input_per_mtok": 1.0, "output_per_mtok": 5.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.05。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6-sol", "name": "GPT-6 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.20。公式料金表から削除済み", "deprecated": true },
         { "id": "gpt-6-luna", "name": "GPT-6 Luna", "input_per_mtok": 0.10, "output_per_mtok": 0.50, "context_window": 1050000, "notes": "軽量ティア。キャッシュ入力$0.01", "deprecated": false },
-        { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "キャッシュ入力$0.40。Fast mode: 2倍。2026/11/30まで導入価格（通常 $5/$30）", "deprecated": false },
+        { "id": "gpt-5.6-sol", "name": "GPT-5.6 Sol", "input_per_mtok": 4.0, "output_per_mtok": 20.0, "context_window": 1050000, "notes": "キャッシュ入力$0.40。2026/11/30まで導入価格（通常 $5/$30）。公式料金表から削除済み", "deprecated": true },
         { "id": "gpt-5.6-terra", "name": "GPT-5.6 Terra", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 1050000, "notes": "キャッシュ入力$0.20。公式料金表から削除済み", "deprecated": true },
         { "id": "gpt-5.6-luna", "name": "GPT-5.6 Luna", "input_per_mtok": 0.20, "output_per_mtok": 1.20, "context_window": 1050000, "notes": "キャッシュ入力$0.02。公式料金表から削除済み", "deprecated": true },
         { "id": "gpt-5.5", "name": "GPT-5.5", "input_per_mtok": 5.0, "output_per_mtok": 30.0, "context_window": 1000000, "notes": "272K超の入力は入力2倍・出力1.5倍", "deprecated": true },
@@ -45,6 +46,7 @@ const PRICING_DATA = {
       "id": "google", "name": "Google",
       "pricing_url": "https://aistudio.google.com/docs/pricing",
       "models": [
+        { "id": "gemini-4-carbon", "name": "Gemini 4 Carbon", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "最上位の推論モデル。2026/11/30まで導入価格。以降 $4/$20。無料枠なし", "deprecated": false },
         { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "2026/11/30まで導入価格。以降 $4/$20。無料枠なし", "deprecated": false },
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
         { "id": "gemini-3.8-flash", "name": "Gemini 3.8 Flash", "input_per_mtok": 0.75, "output_per_mtok": 3.75, "context_window": 1000000, "notes": "2026/12/31まで導入価格。以降 $1.50/$7.50", "deprecated": false },
