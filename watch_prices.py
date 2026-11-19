@@ -20,7 +20,8 @@ from bs4 import BeautifulSoup
 # 監視対象(data.js 内 PRICING_DATA の pricing_url と合わせておく)
 TARGETS = [
     {"name": "Anthropic", "url": "https://claude.com/pricing"},
-    {"name": "OpenAI",    "url": "https://developers.openai.com/api/docs/pricing"},
+    # 2026/11: HTML版は料金表タブの一部(Standardの行)を取りこぼすことがあるため .md 版を監視
+    {"name": "OpenAI",    "url": "https://developers.openai.com/api/docs/pricing.md"},
     # 2026/11: ai.google.dev から aistudio.google.com へ移転。HTML版は本文がJS描画で取得できないため .md 版を監視
     {"name": "Google",    "url": "https://aistudio.google.com/docs/pricing.md"},
     {"name": "xAI",       "url": "https://x.ai/api"},

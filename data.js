@@ -4,7 +4,7 @@
    index.html から <script src="data.js"> で読み込まれる
    ===================================================== */
 const PRICING_DATA = {
-  "last_updated": "2026-11-13",
+  "last_updated": "2026-11-19",
   "providers": [
     {
       "id": "anthropic", "name": "Anthropic",
@@ -29,6 +29,8 @@ const PRICING_DATA = {
       "id": "openai", "name": "OpenAI",
       "pricing_url": "https://developers.openai.com/api/docs/pricing",
       "models": [
+        { "id": "gpt-6.2-astra", "name": "GPT-6.2 Astra", "input_per_mtok": 8.0, "output_per_mtok": 40.0, "context_window": 1050000, "notes": "最上位モデル。6 Astraから20%値下げ。キャッシュ入力$0.40。Fast mode: 2倍", "deprecated": false },
+        { "id": "gpt-6.2-sol", "name": "GPT-6.2 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.10。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6-astra", "name": "GPT-6 Astra", "input_per_mtok": 10.0, "output_per_mtok": 50.0, "context_window": 1050000, "notes": "最上位モデル。キャッシュ入力$1.00。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6.1-sol", "name": "GPT-6.1 Sol", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1050000, "notes": "キャッシュ入力$0.10。Fast mode: 2倍", "deprecated": false },
         { "id": "gpt-6.1-terra", "name": "GPT-6.1 Terra", "input_per_mtok": 1.0, "output_per_mtok": 5.0, "context_window": 1050000, "notes": "バランス型ティア。キャッシュ入力$0.05。Fast mode: 2倍", "deprecated": false },
@@ -47,6 +49,7 @@ const PRICING_DATA = {
       "pricing_url": "https://aistudio.google.com/docs/pricing",
       "models": [
         { "id": "gemini-4-carbon", "name": "Gemini 4 Carbon", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "最上位の推論モデル。2026/11/30まで導入価格。以降 $4/$20。無料枠なし", "deprecated": false },
+        { "id": "gemini-4-neon", "name": "Gemini 4 Neon", "input_per_mtok": 3.0, "output_per_mtok": 15.0, "context_window": 1000000, "notes": "Gemini 4の標準ティア。キャッシュ入力$0.15。無料枠なし", "deprecated": false },
         { "id": "gemini-4-argon", "name": "Gemini 4 Argon", "input_per_mtok": 2.0, "output_per_mtok": 10.0, "context_window": 1000000, "notes": "2026/11/30まで導入価格。以降 $4/$20。無料枠なし", "deprecated": false },
         { "id": "gemini-4-hydrogen", "name": "Gemini 4 Hydrogen", "input_per_mtok": 1.5, "output_per_mtok": 7.5, "context_window": 1000000, "notes": "Gemini 4の軽量ティア。キャッシュ入力$0.075。無料枠あり", "deprecated": false },
         { "id": "gemini-3.1-pro", "name": "Gemini 3.1 Pro", "input_per_mtok": 2.0, "output_per_mtok": 12.0, "context_window": 2000000, "notes": "200K超は $4/$18 に上昇", "deprecated": false },
